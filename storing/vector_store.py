@@ -24,3 +24,4 @@ def load_vector_store(path="data/index"):
     embeddings = get_embedding_model()
     chroma = Chroma(persist_directory=path, embedding_function=embeddings)
     return chroma.as_retriever()
+

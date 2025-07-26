@@ -7,6 +7,11 @@ def run_ingestion():
     documents = load_documents_from_folder()
     print(f"[*] Loaded {len(documents)} documents.")
 
+    with open("data/raw_documents.txt","w") as f:
+        for doc in documents:
+            f.write(doc.page_content + "\n\n")
+        print("[*] Raw documents saved to data/raw_documents.txt")
+
     print("[*] Splitting documents...")
     chunks = split_documents(documents)
     print(f"[*] Split into {len(chunks)} chunks.")

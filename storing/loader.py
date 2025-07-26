@@ -1,4 +1,3 @@
-from langchain_unstructured import UnstructuredLoader
 from typing import List
 from langchain_core.documents import Document
 from pathlib import Path
