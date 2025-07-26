@@ -30,6 +30,8 @@ env/
 .venv/
 .env/
 
+data/
+
 # VS Code settings
 .vscode/
 
