@@ -7,11 +7,13 @@
    pip install -r requirements.txt
    ```
 
-2. **Create a folder docs in the root directory**:
+2. **Create a folder data/docs in the root directory**:
 
    ```bash
-   mkdir docs
+   mkdir -p data/docs
    ```
+
+   - Keep the downloaded pdfs in this folder
 
 3. **Copy .env.example to .env**:
 
