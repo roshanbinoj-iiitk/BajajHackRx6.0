@@ -3,7 +3,7 @@ from langchain_core.documents import Document
 
 from tqdm import tqdm
 from langchain_community.vectorstores import Chroma
-from app.config import get_embedding_model, get_index
+from app.config import get_vector_store
 from langchain_pinecone import PineconeVectorStore
 
 import json
@@ -27,7 +27,7 @@ def prepare_pinecone_data(docs: list[Document]):
     ]
 
 def save_vector_store(docs: list[Document]):
-    index = get_index()
+    index, pc = get_vector_store()
 
     all_data = prepare_pinecone_data(docs)
 

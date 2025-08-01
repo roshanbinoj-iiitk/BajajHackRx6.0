@@ -1,4 +1,5 @@
-from storing.loader import load_documents_from_folder
+from pathlib import Path
+from storing.loader import load_documents_from_folder,download_pdf
 from storing.chunker import split_documents
 from storing.vector_store import save_vector_store
 
@@ -20,5 +21,12 @@ def run_ingestion():
     save_vector_store(chunks)
     print("[+] Done. Vector store saved to /data/index.")
     
+
+
+def download_and_ingest(url:str):
+    
+    download_pdf(url, Path("data/docs/document.pdf"))
+    run_ingestion()
+
 if __name__ == "__main__":
     run_ingestion()
