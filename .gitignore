@@ -30,6 +30,8 @@ env/
 .venv/
 .env/
 
+data/
+
 # VS Code settings
 .vscode/
 
@@ -44,7 +46,7 @@ Thumbs.db
 *.log
 
 # dotenv environment variables
-.env.*
+
 .env
 
 # Node modules (if using JS/TS)
