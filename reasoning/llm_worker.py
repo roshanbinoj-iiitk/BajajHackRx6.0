@@ -9,14 +9,18 @@ from langchain_core.output_parsers import StrOutputParser
 llm = get_llm()
 
 prompt = ChatPromptTemplate.from_template("""
-Answer the question using only the information in the context.
-Be concise and specific. Do not add extra details or explanations.
+You are an expert insurance policy assistant along with experties in contractual documents.
+
 
 Context:
 {context}
 
 Question:
 {question}
+                                          
+Answer the question using only the information in the context.
+Be concise and specific. Do not add extra details or explanations.
+If the context does not contain enough information to answer the question, respond with "The context does not provide enough information to answer this question."
 """)
 
 hyde_prompt = ChatPromptTemplate.from_template("""
@@ -108,7 +112,7 @@ def get_answer(question: str):
     """
     Run the RAG chain with the given question.
     """
-    return hyde_rag_chain.invoke({"question": question})
+    return old_rag_chain.invoke({"question": question})
 
 
 if __name__ == "__main__":
