@@ -18,7 +18,6 @@ class Settings(BaseSettings):
     embedding_model_name: str = "models/embedding-001"
     pinecone_api_key:str
     secret_key:str
-    groq_api_key: str
     perplexity_api_key: str
 
     class Config:

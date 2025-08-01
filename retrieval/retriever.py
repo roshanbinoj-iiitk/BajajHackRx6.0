@@ -24,9 +24,9 @@ class DocumentRetriever(Runnable):
             top_n=3,
             rank_fields=["text"],
             return_documents=True,
-            parameters={
-                "truncate": "END"
-            }
+         parameters = {
+             "truncate":"END"
+             } 
 
         )
         return ranked_results.data
