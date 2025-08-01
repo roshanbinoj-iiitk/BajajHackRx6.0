@@ -10,6 +10,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmb
 
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
+from langchain_perplexity import ChatPerplexity
 
 class Settings(BaseSettings):
     gemini_api_key: str
@@ -18,6 +19,7 @@ class Settings(BaseSettings):
     pinecone_api_key:str
     secret_key:str
     groq_api_key: str
+    perplexity_api_key: str
 
     class Config:
         env_file = ".env"
@@ -35,9 +37,18 @@ def get_llm():
     #     temperature=0.0
 
     # )
-    return ChatGroq(
-        model="llama-3.3-70b-versatile",  # or another Groq-supported model
-        groq_api_key=settings.groq_api_key,
+    # return ChatGroq(
+    #     model="meta-llama/llama-4-scout-17b-16e-instruct",  # or another Groq-supported model
+    #     groq_api_key=settings.groq_api_key,
+    #     temperature=0.1
+    # )
+    # return ChatGoogleGenerativeAI(
+    #     model="gemini-2.5-pro",
+    #     google_api_key=settings.gemini_api_key
+    # )
+    return ChatPerplexity(
+        model="sonar-pro",  # or another supported model
+        pplx_api_key=settings.perplexity_api_key,
         temperature=0.0
     )
 
