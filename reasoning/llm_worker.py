@@ -99,7 +99,7 @@ hyde_rag_chain = (
     | llm
     | StrOutputParser() 
 )
-
+    
 
 old_rag_chain = (
     {"context": retriever, "question": RunnableLambda(lambda x: x)}

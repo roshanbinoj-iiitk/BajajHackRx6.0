@@ -14,15 +14,18 @@ def load_documents_from_folder() -> List[Document]:
     for file in Path(folder_path).glob("*.pdf"):
         loader = PyPDFLoader(str(file))
         docs.extend(loader.load())
-    
-    if os.path.exists(folder_path):
-        shutil.rmtree(folder_path)
 
+    delete_files_in_folder(folder_path)  # Clean up after loading   
     
     return docs
 
 
-
+def delete_files_in_folder(folder_path):
+    if os.path.exists(folder_path):
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
 
 def download_pdf(url: str, dest_path: Path):
     """Download a PDF from a URL and save it to the specified path."""

@@ -26,14 +26,14 @@ def prepare_pinecone_data(docs: list[Document]):
         for i, doc in enumerate(docs)
     ]
 
-def save_vector_store(docs: list[Document]):
+def save_vector_store(docs: list[Document],namespace: str = "__default__"):
     index, pc = get_vector_store()
 
     all_data = prepare_pinecone_data(docs)
 
     for i in range(0, len(all_data), BATCH_SIZE):
         batch = all_data[i:i + BATCH_SIZE]
-        index.upsert_records("__default__",batch)
+        index.upsert_records(namespace,batch)
         print(f"Upserted batch {i // BATCH_SIZE + 1} with {len(batch)} items")
 
 

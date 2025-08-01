@@ -107,9 +107,11 @@ async def bulk_ask_questions(request: BulkQuestionRequest):
 
 
     download_and_ingest(request.documents)
-
-    wait_for_pinecone(get_vector_store()[0])
+    index =get_vector_store()[0]
+    wait_for_pinecone(index)
     answers = await asyncio.gather(*[get_async_answer(q) for q in request.questions])
+    index.delete(namespace="__default__")  # Clear the index after processing
+
     return {"answers": answers}
 
 
@@ -131,7 +133,7 @@ def run_ingestion():
     print(f"[*] Split into {len(chunks)} chunks.")
 
     print("[*] Saving to vector store...")
-    save_vector_store(chunks)
+    save_vector_store(chunks,namespace="")
     print("[+] Done. Vector store saved to /data/index.")
     
 
