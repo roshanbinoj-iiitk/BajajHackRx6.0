@@ -9,6 +9,7 @@ load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 class Settings(BaseSettings):
     gemini_api_key: str
@@ -16,7 +17,7 @@ class Settings(BaseSettings):
     embedding_model_name: str = "models/embedding-001"
     pinecone_api_key:str
     secret_key:str
-    openai_api_key: str
+    groq_api_key: str
 
     class Config:
         env_file = ".env"
@@ -34,7 +35,11 @@ def get_llm():
     #     temperature=0.0
 
     # )
-    return ChatGoogleGenerativeAI(model="gemini-2.5-pro",google_api_key=settings.gemini_api_key,temperature=0.0)
+    return ChatGroq(
+        model="llama-3.3-70b-versatile",  # or another Groq-supported model
+        groq_api_key=settings.groq_api_key,
+        temperature=0.0
+    )
 
 @lru_cache()
 def get_embedding_model():
