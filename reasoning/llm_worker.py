@@ -112,7 +112,7 @@ def get_answer(question: str):
     """
     Run the RAG chain with the given question.
     """
-    return old_rag_chain.invoke({"question": question})
+    return hyde_rag_chain.invoke({"question": question})
 
 
 if __name__ == "__main__":
