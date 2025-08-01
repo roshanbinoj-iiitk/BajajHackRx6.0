@@ -7,29 +7,33 @@ from langchain_core.output_parsers import StrOutputParser
 
 
 llm = get_llm()
-
 prompt = ChatPromptTemplate.from_template("""
-You are an expert insurance policy assistant along with experties in contractual documents.
-
+You are an expert assistant for analyzing insurance policies and contractual documents.
 
 Context:
 {context}
 
 Question:
 {question}
-                                          
-Answer the question using only the information in the context.
-Be concise and specific. Do not add extra details or explanations.
-If the context does not contain enough information to answer the question, respond with "The context does not provide enough information to answer this question."
+
+Instructions:
+- Use only the information provided in the context.
+- Be concise and precise.
+- If the context is insufficient to answer, respond with: "The context does not provide enough information to answer this question."
+- Do NOT guess, add explanations, or use external knowledge.
+- Format response as plain text only (no markdown, no bullet points).
 """)
+
 
 hyde_prompt = ChatPromptTemplate.from_template("""
-Generate a dummy response to the following question the context is not available.
-The question is regarding a policy document, be specific to it.
-The response should be a dummy response, which will be used for Hyde retrieval.
+Generate a hypothetical paragraph that answers the following insurance policy question, assuming context is not available.
+
+Question:
 {question}
 
+The answer should resemble actual policy text — formal, factual, and specific.
 """)
+
 
 retriever = get_retriever()
 
