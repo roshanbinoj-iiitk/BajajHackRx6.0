@@ -17,9 +17,14 @@ def run_ingestion():
     chunks = split_documents(documents)
     print(f"[*] Split into {len(chunks)} chunks.")
 
-    print("[*] Saving to vector store...")
-    save_vector_store(chunks)
-    print("[+] Done. Vector store saved to /data/index.")
+    with open("data/chunks.txt","w") as f:
+        for chunk in chunks:
+            f.write(chunk.page_content + "\n\n")
+        print("[*] Chunks saved to data/chunks.txt")
+
+    # print("[*] Saving to vector store...")
+    # save_vector_store(chunks)
+    # print("[+] Done. Vector store saved to /data/index.")
     
 
 

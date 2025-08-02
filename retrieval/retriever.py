@@ -18,7 +18,8 @@ class DocumentRetriever(Runnable):
 
         ranked_results = self.pc.inference.rerank(
             
-            model="bge-reranker-v2-m3",
+            # model="bge-reranker-v2-m3",
+            model="pinecone-rerank-v0",
             query = query,
             documents=docs,
             top_n=3,
@@ -37,7 +38,7 @@ class DocumentRetriever(Runnable):
         """
         Required by Runnable: runs when .invoke() is called or when used in a LangChain chain.
         """
-        # print("direct input :",input)
+        print("direct input :",input)
         print("Retrieving ...")
         start_time = time.time()
         result = self.index.search(
@@ -55,7 +56,7 @@ class DocumentRetriever(Runnable):
 
         reranked_result = self.rerank(formatted_docs, input['question'])
 
-        print("Reranked result : ",reranked_result)
+        print("Reranking complete",reranked_result)
         print(f"Search time: {end_time - start_time:.4f} seconds")
         return reranked_result
 
@@ -67,6 +68,6 @@ class DocumentRetriever(Runnable):
 
 
 
-def get_retriever(index_path="data/index", top_k=5):
+def get_retriever(index_path="data/index", top_k=10):
     return DocumentRetriever(index_path=index_path, top_k=top_k)
 

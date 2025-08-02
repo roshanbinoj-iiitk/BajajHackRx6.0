@@ -18,7 +18,6 @@ class Settings(BaseSettings):
     embedding_model_name: str = "models/embedding-001"
     pinecone_api_key:str
     secret_key:str
-    groq_api_key: str
     perplexity_api_key: str
 
     class Config:
@@ -42,15 +41,15 @@ def get_llm():
     #     groq_api_key=settings.groq_api_key,
     #     temperature=0.1
     # )
-    # return ChatGoogleGenerativeAI(
-    #     model="gemini-2.5-pro",
-    #     google_api_key=settings.gemini_api_key
-    # )
-    return ChatPerplexity(
-        model="sonar-pro",  # or another supported model
-        pplx_api_key=settings.perplexity_api_key,
-        temperature=0.0
+    return ChatGoogleGenerativeAI(
+        model="gemini-2.5-pro",
+        google_api_key=settings.gemini_api_key
     )
+    # return ChatPerplexity(
+    #     model="sonar-pro",  # or another supported model
+    #     pplx_api_key=settings.perplexity_api_key,
+    #     temperature=0.0
+    # )
 
 @lru_cache()
 def get_embedding_model():

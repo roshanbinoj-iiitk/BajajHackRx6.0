@@ -10,6 +10,7 @@ import asyncio
 from pathlib import Path
 from storing.loader import load_documents_from_folder,download_pdf
 from storing.chunker import split_documents
+from storing.preprocessing import process_pdf_for_chunking
 from storing.vector_store import save_vector_store
 
 
@@ -117,7 +118,7 @@ async def bulk_ask_questions(request: BulkQuestionRequest):
 
 
 
-
+# Older code for ingestion, kept for reference
 def run_ingestion():
     print("[*] Loading documents...")
     documents = load_documents_from_folder()
@@ -136,12 +137,23 @@ def run_ingestion():
     save_vector_store(chunks,namespace="__default__")
     print("[+] Done. Vector store saved to /data/index.")
     
+def run_new_ingestion():
+    print("[*] Processing PDF to extract and clean content...")
+    documents = process_pdf_for_chunking(Path("data/docs/document.pdf"))
+    print("[*] PDF processing complete.")
+    print("[*] Splitting documents...")
+    chunks = split_documents(documents)
+    print(f"[*] Split into {len(chunks)} chunks.")
 
+    print("[*] Saving to vector store...")
+    save_vector_store(chunks,namespace="__default__")
+    print("[+] Done. Vector store saved to /data/index.")
+        
 
 def download_and_ingest(url:str):
     
     download_pdf(url, Path("data/docs/document.pdf"))
-    run_ingestion()
+    run_new_ingestion()
 
 
 
