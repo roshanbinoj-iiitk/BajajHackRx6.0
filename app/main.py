@@ -10,7 +10,7 @@ app = FastAPI(
     version="0.0.469"
 )
 
-app.add_middleware(AuthMiddleware)
+# app.add_middleware(AuthMiddleware)
 
 app.include_router(api_key_router)
 app.include_router(router)
