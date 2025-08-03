@@ -54,12 +54,12 @@ class DocumentRetriever(Runnable):
         print(f"Search results: {result['result']['hits']}")
         formatted_docs = [{"_id": doc["_id"], "text": doc["fields"]["text"]} for doc in result["result"]["hits"]]
 
-        reranked_result = self.rerank(formatted_docs, input['question'])
+        # reranked_result = self.rerank(formatted_docs, input['question'])
 
-        print("Reranking complete",reranked_result)
-        print(f"Search time: {end_time - start_time:.4f} seconds")
-        return reranked_result
-        # return formatted_docs
+        # print("Reranking complete",reranked_result)
+        # print(f"Search time: {end_time - start_time:.4f} seconds")
+        # return reranked_result
+        return formatted_docs
 
         # context = "\n\n".join([doc['fields']['text'] for doc in result["result"]["hits"]])
 
