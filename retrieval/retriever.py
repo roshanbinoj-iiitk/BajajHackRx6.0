@@ -54,6 +54,8 @@ class DocumentRetriever(Runnable):
         print(f"Search results: {result['result']['hits']}")
         formatted_docs = [{"_id": doc["_id"], "text": doc["fields"]["text"]} for doc in result["result"]["hits"]]
 
+        print(f"Formatted documents: {formatted_docs}")
+
         # reranked_result = self.rerank(formatted_docs, input['question'])
 
         # print("Reranking complete",reranked_result)
@@ -69,6 +71,6 @@ class DocumentRetriever(Runnable):
 
 
 
-def get_retriever(index_path="data/index", top_k=10):
+def get_retriever(index_path="data/index", top_k=5):
     return DocumentRetriever(index_path=index_path, top_k=top_k)
 

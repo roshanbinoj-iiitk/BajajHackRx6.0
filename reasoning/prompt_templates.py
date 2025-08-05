@@ -11,7 +11,7 @@ Question:
 {question}
 
 Instructions:
-- Answer the question using ONLY the information from the context above.Do not add the citation doc number.
+- Answer the question using ONLY the information from the context above. Do not add the citation doc number.
 - Be concise, precise and give short answer.
 - If the context is insufficient, respond with: "The context does not provide enough information to answer this question."
 - Do NOT guess or use external knowledge.
